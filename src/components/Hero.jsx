@@ -1,6 +1,6 @@
 import React from "react";
 import Youtube from "react-youtube";
-import { FaPlay, FaTimes } from "react-icons/fa";
+import { FaPlay, FaTimes, FaStar, FaCalendarAlt } from "react-icons/fa";
 
 const BACKDROP_PATH = "https://image.tmdb.org/t/p/w1280";
 
@@ -39,20 +39,30 @@ const Hero = ({ movie, trailer, playing, setPlaying }) => (
         </button>
       </>
     ) : (
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 bg-dark bg-opacity-50">
+      <div className="absolute inset-0 flex flex-col justify-end items-center md:items-start text-center md:text-left p-6 md:p-12 bg-gradient-to-b from-transparent to-black bg-opacity-60">
         {trailer ? (
           <button
-            className="mb-6 inline-flex items-center justify-center gap-2 p-2 rounded-lg text-base bg-green-600 text-white shadow-lg transition-transform transform hover:scale-110"
+            className="mb-4 inline-flex items-center justify-center gap-2 p-2 rounded-lg text-base bg-green-600 text-white shadow-lg transition-transform transform hover:scale-110"
             onClick={() => setPlaying(true)}
             type="button">
             <FaPlay />
             <span>Play Trailer</span>
           </button>
         ) : (
-          <p className="text-lg text-gray-300">Sorry, no trailer available</p>
+          <p className="text-lg text-gray-300 mb-4">Sorry, no trailer available</p>
         )}
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{movie.title}</h1>
-        <p className="text-lg md:text-xl leading-relaxed max-w-[90%]">{movie.overview}</p>
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-shadow-lg">{movie.title}</h1>
+        <p className="text-base md:text-lg leading-relaxed max-w-[90%] mb-4">{movie.overview}</p>
+        <div className="flex flex-row items-center justify-between gap-4 md:gap-8 mb-6">
+          <div className="flex items-center gap-2">
+            <FaStar className="text-yellow-400 text-lg md:text-xl" />
+            <span className="text-lg md:text-xl font-semibold tracking-wider">{movie.vote_average.toFixed(1)} / 10</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaCalendarAlt className="text-lime-600 text-lg md:text-xl" />
+            <span className="text-lg md:text-xl font-semibold tracking-wider">{new Date(movie.release_date).getFullYear()}</span>
+          </div>
+        </div>
       </div>
     )}
   </section>
