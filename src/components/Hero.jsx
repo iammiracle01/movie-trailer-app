@@ -1,49 +1,61 @@
 import React from "react";
-import { FaPlay } from "react-icons/fa";
-import YouTube from "react-youtube";
+import Youtube from "react-youtube";
+import { FaPlay, FaTimes } from "react-icons/fa";
 
-const Hero = ({ selectedMovie }) => {
-  const imagePath = "https://image.tmdb.org/t/p/original";
+const BACKDROP_PATH = "https://image.tmdb.org/t/p/w1280";
 
-  const renderTrailer = () => {
-    if (!selectedMovie.videos || !selectedMovie.videos.results) return null;
-
-    const trailer = selectedMovie.videos.results.find((vid) =>
-      vid.name.includes('Trailer')
-    );
-
-    return trailer ? (
-      <YouTube
-        videoId={trailer.key}
-        opts={{
-          height: '390',
-          width: '640',
-        }}
-      />
-    ) : null;
-  };
-
-  return (
-    <section
-      className="relative min-h-screen bg-cover bg-center text-white flex items-end"
-      style={{
-        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('${imagePath}${selectedMovie.backdrop_path}')`,
-      }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-      <div className="relative z-10 px-4 py-8 max-w-[80%]">
-        {renderTrailer()}
-        <button className="mb-6 inline-flex items-center justify-center gap-2 p-2 rounded-lg text-base bg-red-600 text-white shadow-lg transition-transform transform hover:scale-110 ">
-        <FaPlay />
-            <span>Play Trailer</span>
+const Hero = ({ movie, trailer, playing, setPlaying }) => (
+  <section
+    className="relative min-h-[80vh] bg-cover bg-center text-white transition-opacity duration-500"
+    style={{
+      backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url(${BACKDROP_PATH}${movie.backdrop_path})`,
+    }}>
+    {playing ? (
+      <>
+        <Youtube
+          videoId={trailer.key}
+          className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"
+          containerClassName="w-full h-full"
+          opts={{
+            width: "100%",
+            height: "100%",
+            playerVars: {
+              autoplay: 1,
+              controls: 0,
+              cc_load_policy: 0,
+              fs: 0,
+              iv_load_policy: 0,
+              modestbranding: 0,
+              rel: 0,
+              showinfo: 0,
+            },
+          }}
+        />
+        <button
+          onClick={() => setPlaying(false)}
+          className="inline-flex gap-2 absolute top-0 right-0 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition items-center justify-center">
+          <FaTimes />
+          <span>Close</span>
         </button>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{selectedMovie.title}</h1>
-        {selectedMovie.overview && (
-          <p className="text-lg md:text-xl leading-relaxed px-4 md:px-0">{selectedMovie.overview}</p>
+      </>
+    ) : (
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 bg-dark bg-opacity-50">
+        {trailer ? (
+          <button
+            className="mb-6 inline-flex items-center justify-center gap-2 p-2 rounded-lg text-base bg-green-600 text-white shadow-lg transition-transform transform hover:scale-110"
+            onClick={() => setPlaying(true)}
+            type="button">
+            <FaPlay />
+            <span>Play Trailer</span>
+          </button>
+        ) : (
+          <p className="text-lg text-gray-300">Sorry, no trailer available</p>
         )}
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">{movie.title}</h1>
+        <p className="text-lg md:text-xl leading-relaxed max-w-[90%]">{movie.overview}</p>
       </div>
-    </section>
-  );
-};
+    )}
+  </section>
+);
 
 export default Hero;

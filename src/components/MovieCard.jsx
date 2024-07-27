@@ -1,9 +1,9 @@
 import React from "react";
 
-const MovieCard = ({ movie, setSelectedMovie }) => {
+const MovieCard = ({ movie, selectMovie }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
   return (
-    <div className="cursor-pointer transition-transform hover:scale-105" onClick={() => setSelectedMovie(movie)}>
+    <div className="cursor-pointer transition-transform hover:scale-105" onClick={() => selectMovie(movie)}>
       {movie.poster_path ? (
         <img className="w-full h-[450px] object-cover rounded" src={`${imagePath}${movie.poster_path}`} alt={movie.title} />
       ) : (
