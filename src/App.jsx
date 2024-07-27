@@ -15,11 +15,9 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-
   const MOVIE_API = "https://api.themoviedb.org/3/";
-    const SEARCH_API = `${MOVIE_API}search/movie`;
-    const DISCOVER_API = `${MOVIE_API}discover/movie`;
-
+  const SEARCH_API = `${MOVIE_API}search/movie`;
+  const DISCOVER_API = `${MOVIE_API}discover/movie`;
 
   useEffect(() => {
     fetchMovies();
@@ -60,10 +58,17 @@ const App = () => {
       });
 
       if (data.videos && data.videos.results) {
-        const trailer = data.videos.results.find(
-          (vid) => vid.name === "Official Trailer"
+        const trailerIndex = data.videos.results.findIndex(
+          (vid) =>
+            vid.name.includes("Official Trailer") ||
+            vid.name.includes("Trailer")
         );
-        setTrailer(trailer ? trailer : data.videos.results[0]);
+
+        const trailer =
+          trailerIndex !== -1
+            ? data.videos.results[trailerIndex]
+            : data.videos.results[0];
+        setTrailer(trailer);
       }
 
       setMovie(data);
