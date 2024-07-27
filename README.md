@@ -1,5 +1,5 @@
 # TrailersFlix
-![TrailersFlix](https://github.com/iammiracle01/movie-trailer-app/blob/main/public/trailersflix.PNG?raw=true)
+![TrailersFlix](https://github.com/iammiracle01/movie-trailer-app/blob/main/trailersflix.PNG?raw=true)
 
 TrailersFlix is a web application that allows users to search for movies and watch trailers. The application fetches movie data from the TMDb API, leveraging Vite for a fast development environment and Tailwind CSS for styling. It also integrates React YouTube to provide seamless trailer playback directly within the app.
 
