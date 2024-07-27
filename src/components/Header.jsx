@@ -30,7 +30,7 @@ const Header = ({ setSearchKey, fetchMovies }) => {
         >
           <FaTv className="text-[#ff5722] text-5xl" />
           <h1 className="bg-gradient-to-r from-[#ff5722] via-green-500 to-indigo-400 text-transparent bg-clip-text text-4xl">
-            TrailerFlix
+            TrailersFlix
           </h1>
         </a>
         <form className="flex items-center w-full sm:w-auto" onSubmit={handleSearch}>

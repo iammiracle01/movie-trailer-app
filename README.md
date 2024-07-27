@@ -1,11 +1,11 @@
-# TrailerFlix
-![TrailerFlix](https://github.com/iammiracle01/my-portfolio/blob/master/public/preview2.PNG?raw=true)
+# TrailersFlix
+![TrailersFlix](https://github.com/iammiracle01/movie-trailer-app/blob/main/public/trailersflix.PNG?raw=true)
 
-TrailerFlix is a web application that allows users to search for movies and watch trailers. The application fetches movie data from the TMDb API, leveraging Vite for a fast development environment and Tailwind CSS for styling. It also integrates React YouTube to provide seamless trailer playback directly within the app.
+TrailersFlix is a web application that allows users to search for movies and watch trailers. The application fetches movie data from the TMDb API, leveraging Vite for a fast development environment and Tailwind CSS for styling. It also integrates React YouTube to provide seamless trailer playback directly within the app.
 
 ## Live Demo
 
-You can check out the live demo at [https://trailerflix.netlify.app/](https://iammiracle.vercel.app/).
+You can check out the live demo at [https://trailersflix.netlify.app/](https://trailersflix.netlify.app/).
 
 ## Features
 
@@ -26,27 +26,25 @@ You can check out the live demo at [https://trailerflix.netlify.app/](https://ia
 3. Start the development server with `npm run dev` or `yarn dev`
 4. Open [http://localhost:5173](http://localhost:5173) with your browser to see the result
 
-## Learn More
-
-To learn more about the technologies used in TrailerFlix, check out the following resources:
-
-- [Vite Documentation](https://vitejs.dev/guide/) -  Learn about Vite and its features.
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs/installation) -  Learn about Tailwind CSS and its utility-first approach.
-- [React YouTube Documentation](https://www.npmjs.com/package/react-youtube) - Learn about the React YouTube component and its usage.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
 ## Deployment
 
-TrailerFlix is deployed on Netlify. To deploy your own version of the app, follow these steps:
+TrailersFlix is deployed on Netlify. To deploy your own version of the app, follow these steps:
 
 1. Go to [Netlify](https://www.netlify.com/) and sign up or log in.
 2. Click on "New site from Git" and connect your Git repository.
-3. Select the repository containing the TrailerFlix code.
+3. Select the repository containing the TrailersFlix code.
 4. Configure the build settings:
     Build Command: npm run build or yarn build
     Publish Directory: dist
 5. Click "Deploy site" and Netlify will build and deploy your application.
 
 For more information on deploying with Netlify, check out the [Netlify Documentation](https://docs.netlify.com/frameworks/vite/).
+
+## Learn More
+
+To learn more about the technologies used in TrailersFlix, check out the following resources:
+
+- [Vite Documentation](https://vitejs.dev/guide/) -  Learn about Vite and its features.
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs/installation) -  Learn about Tailwind CSS and its utility-first approach.
+- [React YouTube Documentation](https://www.npmjs.com/package/react-youtube) - Learn about the React YouTube component and its usage.
+
