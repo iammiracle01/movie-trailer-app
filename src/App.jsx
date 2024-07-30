@@ -11,7 +11,7 @@ const App = () => {
   const [trailer, setTrailer] = useState(null);
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
-  const [movie, setMovie] = useState({ title: "Loading Movies" });
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -36,10 +36,14 @@ const App = () => {
       });
 
       setMovies(data.results);
-      setMovie(data.results[0] || { title: "No Movies Found" });
-
-      if (data.results.length) {
-        await fetchMovie(data.results[0].id);
+      if (!searchKey && data.results.length > 0) {
+        // Only set the first movie on initial load (no search key)
+        setMovie(data.results[0]);
+        fetchMovie(data.results[0].id);
+      } else {
+        // Reset movie state when searching
+        setMovie(null);
+        setTrailer(null);
       }
     } catch (err) {
       setError("Failed to fetch movies. Please try again later.");
@@ -81,6 +85,7 @@ const App = () => {
     fetchMovie(movie.id);
     setPlaying(false);
     setMovie(movie);
+    setSearchKey(""); // Clear searchKey when a movie is selected
     window.scrollTo(0, 0);
   };
 
@@ -91,19 +96,31 @@ const App = () => {
         <Loading />
       ) : error ? (
         <Error message={error} />
-      ) : movies.length ? (
-        <main className="flex-grow">
-          <Hero
-            movie={movie}
-            trailer={trailer}
-            playing={playing}
-            setPlaying={setPlaying}
-          />
-          <MovieList movies={movies} selectMovie={selectMovie} />
-        </main>
       ) : (
-        <div className="flex-grow flex items-center justify-center text-lg">
-          Sorry, no movies found
+        <div className="flex-grow">
+          {/* Conditionally render the search results text */}
+          {searchKey && !movie && (
+            <p className="text-center text-xl p-4 font-semibold bg-black bg-opacity-70 text-gray-200 border-t border-gray-600">
+              Showing search results for "<span className="font-bold">{searchKey}</span>"
+            </p>
+          )}
+          {movies.length ? (
+            <main className="flex-grow">
+              {movie && (
+                <Hero
+                  movie={movie}
+                  trailer={trailer}
+                  playing={playing}
+                  setPlaying={setPlaying}
+                />
+              )}
+              <MovieList movies={movies} selectMovie={selectMovie} />
+            </main>
+          ) : (
+            <div className="flex-grow flex items-center justify-center text-lg">
+              Sorry, no movies found
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -111,3 +128,4 @@ const App = () => {
 };
 
 export default App;
+
